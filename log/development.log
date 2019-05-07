@@ -1,0 +1,451 @@
+  [1m[35m (0.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "Frozenmouth_Eventbrite_development"[0m
+  ↳ bin/rake:9
+  [1m[35m (0.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "Frozenmouth_Eventbrite_test"[0m
+  ↳ bin/rake:9
+  [1m[35m (0.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "Frozenmouth_Eventbrite_development"[0m
+  ↳ bin/rake:9
+  [1m[35m (0.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "Frozenmouth_Eventbrite_test"[0m
+  ↳ bin/rake:9
+  [1m[35m (570.4ms)[0m  [1m[35mCREATE DATABASE "Frozenmouth_Eventbrite_development" ENCODING = 'unicode'[0m
+  ↳ bin/rake:9
+  [1m[35m (433.7ms)[0m  [1m[35mCREATE DATABASE "Frozenmouth_Eventbrite_test" ENCODING = 'unicode'[0m
+  ↳ bin/rake:9
+  [1m[35m (14.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rake:9
+  [1m[35m (8.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ bin/rake:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1974656633207906340)[0m
+  ↳ bin/rake:9
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rake:9
+Migrating to DeviseCreateUsers (20190217133714)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rake:9
+  [1m[35m (39.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "first_name" character varying, "last_name" character varying, "description" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190217133714_devise_create_users.rb:5
+  [1m[35m (5.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  ↳ db/migrate/20190217133714_devise_create_users.rb:43
+  [1m[35m (4.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  ↳ db/migrate/20190217133714_devise_create_users.rb:44
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190217133714"]]
+  ↳ bin/rake:9
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rake:9
+Migrating to CreateEvents (20190217134748)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rake:9
+  [1m[35m (6.3ms)[0m  [1m[35mCREATE TABLE "events" ("id" bigserial primary key, "start_date" timestamp, "duration" integer, "title" character varying, "description" text, "price" integer, "location" character varying, "user_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190217134748_create_events.rb:3
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE  INDEX  "index_events_on_user_id" ON "events"  ("user_id")[0m
+  ↳ db/migrate/20190217134748_create_events.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190217134748"]]
+  ↳ bin/rake:9
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rake:9
+Migrating to CreateAttendances (20190217134756)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rake:9
+  [1m[35m (5.2ms)[0m  [1m[35mCREATE TABLE "attendances" ("id" bigserial primary key, "stripe_customer_id" character varying, "user_id" bigint, "event_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190217134756_create_attendances.rb:3
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE  INDEX  "index_attendances_on_user_id" ON "attendances"  ("user_id")[0m
+  ↳ db/migrate/20190217134756_create_attendances.rb:3
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX  "index_attendances_on_event_id" ON "attendances"  ("event_id")[0m
+  ↳ db/migrate/20190217134756_create_attendances.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190217134756"]]
+  ↳ bin/rake:9
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rake:9
+  [1m[36mActiveRecord::InternalMetadata Load (2.9ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rake:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rake:9
+  [1m[36mActiveRecord::InternalMetadata Create (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-05-07 08:44:22.224198"], ["updated_at", "2019-05-07 08:44:22.224198"]]
+  ↳ bin/rake:9
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rake:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(1974656633207906340)[0m
+  ↳ bin/rake:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rake:9
+Started GET "/" for 127.0.0.1 at 2019-05-07 15:09:11 +0200
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/alexis/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Processing by EventsController#index as HTML
+  Rendering events/index.html.erb within layouts/application
+  [1m[36mEvent Load (2.2ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  ↳ app/views/events/index.html.erb:5
+  Rendered events/index.html.erb within layouts/application (7.5ms)
+  [1m[36mUser Load (24.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/views/layouts/_header.html.erb:13
+  Rendered layouts/_header.html.erb (38.2ms)
+  Rendered layouts/_footer.html.erb (0.2ms)
+Completed 200 OK in 268ms (Views: 215.9ms | ActiveRecord: 33.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-05-07 15:09:12 +0200
+Processing by EventsController#index as */*
+  Rendering events/index.html.erb within layouts/application
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  ↳ app/views/events/index.html.erb:5
+  Rendered events/index.html.erb within layouts/application (1.3ms)
+  Rendered layouts/_header.html.erb (0.9ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 101ms (Views: 74.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/events/new" for 127.0.0.1 at 2019-05-07 15:09:17 +0200
+Processing by EventsController#new as HTML
+Completed 401 Unauthorized in 11ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-07 15:09:18 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendering /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/shared/_links.html.erb (2.3ms)
+  Rendered /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/sessions/new.html.erb within layouts/application (31.2ms)
+  Rendered layouts/_header.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.2ms)
+Completed 200 OK in 78ms (Views: 64.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-07 15:09:19 +0200
+Processing by Devise::SessionsController#new as */*
+  Rendering /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/shared/_links.html.erb (0.8ms)
+  Rendered /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/sessions/new.html.erb within layouts/application (7.0ms)
+  Rendered layouts/_header.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 28ms (Views: 26.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-07 15:09:21 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendering /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/shared/_links.html.erb (1.0ms)
+  Rendered /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/sessions/new.html.erb within layouts/application (11.3ms)
+  Rendered layouts/_header.html.erb (0.9ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 39ms (Views: 37.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-07 15:09:21 +0200
+Processing by Devise::SessionsController#new as */*
+  Rendering /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/shared/_links.html.erb (1.7ms)
+  Rendered /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/sessions/new.html.erb within layouts/application (8.3ms)
+  Rendered layouts/_header.html.erb (0.9ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 33ms (Views: 31.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2019-05-07 15:09:28 +0200
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/registrations/new.html.erb within layouts/application
+  Rendered /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/shared/_error_messages.html.erb (0.7ms)
+  Rendered /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/shared/_links.html.erb (1.4ms)
+  Rendered /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/registrations/new.html.erb within layouts/application (14.5ms)
+  Rendered layouts/_header.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.4ms)
+Completed 200 OK in 46ms (Views: 44.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2019-05-07 15:09:29 +0200
+Processing by Devise::RegistrationsController#new as */*
+  Rendering /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/registrations/new.html.erb within layouts/application
+  Rendered /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/shared/_error_messages.html.erb (0.6ms)
+  Rendered /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/shared/_links.html.erb (0.9ms)
+  Rendered /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/registrations/new.html.erb within layouts/application (12.2ms)
+  Rendered layouts/_header.html.erb (0.9ms)
+  Rendered layouts/_footer.html.erb (0.4ms)
+Completed 200 OK in 38ms (Views: 37.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2019-05-07 15:09:37 +0200
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"fRVBUcPuHwK8xQgxCbG6FiulnvqvtabiAPuAyXP8ilp5APzFQ1sVGGXoBKXQ4LvU6rLmD4QojJY0fQ6wS3ApnQ==", "user"=>{"email"=>"alexismartin232@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /Users/alexis/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "alexismartin232@gmail.com"], ["LIMIT", 1]]
+  ↳ /Users/alexis/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "alexismartin232@gmail.com"], ["encrypted_password", "$2a$11$jaSCgah7qybzr31wJJIs9OdsnRU7OBkd/EzLGYN1JozOjlZepheAu"], ["created_at", "2019-05-07 13:09:37.330356"], ["updated_at", "2019-05-07 13:09:37.330356"]]
+  ↳ /Users/alexis/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering user_mailer/welcome_email.html.erb within layouts/mailer
+  Rendered user_mailer/welcome_email.html.erb within layouts/mailer (0.4ms)
+  Rendering user_mailer/welcome_email.text.erb within layouts/mailer
+  Rendered user_mailer/welcome_email.text.erb within layouts/mailer (0.5ms)
+UserMailer#welcome_email: processed outbound mail in 542.7ms
+Sent mail to alexismartin232@gmail.com (241.9ms)
+Date: Tue, 07 May 2019 15:09:37 +0200
+From: no-reply@monsite.fr
+To: alexismartin232@gmail.com
+Message-ID: <5cd18391dba98_bc9d3fd42d2f7bf08591a@dorians-macbook-pro-2.home.mail>
+Subject: Bienvenue chez nous !
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="--==_mimepart_5cd18391d99f8_bc9d3fd42d2f7bf0858ad";
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+
+----==_mimepart_5cd18391d99f8_bc9d3fd42d2f7bf0858ad
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: base64
+
+U2FsdXQgIGV0IGJpZW52ZW51ZSBjaGV6IG5vdXMgIQ0KPT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PQ0KIA0KVHUgdCdlcyBpbnNjcml0IHN1ciBtb25zaXRlLmZyIGVuIHV0aWxp
+c2FudCBsJ2UtbWFpbCBzdWl2YW50IDogYWxleGlzbWFydGluMjMyQGdtYWls
+LmNvbS4NCiANClBvdXIgYWNjw6lkZXIgw6AgdG9uIGVzcGFjZSBjbGllbnQs
+IGNvbm5lY3RlLXRvaSB2aWEgOiBodHRwOi8vbW9uc2l0ZS5mci9sb2dpbi4N
+CiANCsOAIHRyw6hzIHZpdGUgc3VyIG1vbnNpdGUuZnIgIQ0K
+
+----==_mimepart_5cd18391d99f8_bc9d3fd42d2f7bf0858ad
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>=0D
+<html>=0D
+  <head>=0D
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf=
+-8" />=0D
+    <style>=0D
+      /* Email styles need to be inline */=0D
+    </style>=0D
+  </head>=0D
+=0D
+  <body>=0D
+    <!DOCTYPE html>=0D
+<html>=0D
+  <head>=0D
+    <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
+pe' />=0D
+  </head>=0D
+  <body>=0D
+    <h1>Salut  et bienvenue chez nous !</h1>=0D
+    <p>=0D
+      Tu t'es inscrit sur monsite.fr en utilisant l'e-mail suivant : alex=
+ismartin232@gmail.com.=0D
+    </p>=0D
+    <p>=0D
+      Pour acc=C3=A9der =C3=A0 ton espace client, connecte-toi via : http=
+://monsite.fr/login.=0D
+    </p>=0D
+    <p> =C3=80 tr=C3=A8s vite sur monsite.fr !=0D
+  </body>=0D
+</html>=0D
+  </body>=0D
+</html>=0D
+
+----==_mimepart_5cd18391d99f8_bc9d3fd42d2f7bf0858ad--
+
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /Users/alexis/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Redirected to http://localhost:3000/events/new
+Completed 302 Found in 960ms (ActiveRecord: 2.9ms)
+
+
+Started GET "/events/new" for 127.0.0.1 at 2019-05-07 15:09:38 +0200
+Processing by EventsController#new as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/alexis/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering events/new.html.erb within layouts/application
+  Rendered events/new.html.erb within layouts/application (1.5ms)
+  Rendered layouts/_header.html.erb (0.9ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 40ms (Views: 16.7ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/events/new" for 127.0.0.1 at 2019-05-07 15:09:38 +0200
+Processing by EventsController#new as */*
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/alexis/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  Rendering events/new.html.erb within layouts/application
+  Rendered events/new.html.erb within layouts/application (1.4ms)
+  Rendered layouts/_header.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 111ms (Views: 72.0ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/events" for 127.0.0.1 at 2019-05-07 15:10:04 +0200
+Processing by EventsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"gElYv+i275zJF994im/ZblnNSZ7J+UhCB18VFPDNU6crOAjnwiKLYi9fjAx9eGf9+BrsSNnq2jtsCFPDPvkaGA==", "title"=>"Test", "description"=>"dkfbkewbf sjbdckdjsabfkj", "price"=>"55", "location"=>"Paris", "start_date"=>"2029-04-02T12:00", "duration"=>"10 h", "commit"=>"Créer"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /Users/alexis/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/events_controller.rb:32
+  [1m[36mEvent Create (1.0ms)[0m  [1m[32mINSERT INTO "events" ("start_date", "duration", "title", "description", "price", "location", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["start_date", "2029-04-02 12:00:00"], ["duration", 10], ["title", "Test"], ["description", "dkfbkewbf sjbdckdjsabfkj"], ["price", 55], ["location", "Paris"], ["user_id", 1], ["created_at", "2019-05-07 13:10:04.293504"], ["updated_at", "2019-05-07 13:10:04.293504"]]
+  ↳ app/controllers/events_controller.rb:32
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/events_controller.rb:32
+Redirected to http://localhost:3000/
+Completed 302 Found in 26ms (ActiveRecord: 3.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-05-07 15:10:04 +0200
+Processing by EventsController#index as HTML
+  Rendering events/index.html.erb within layouts/application
+  [1m[36mEvent Load (0.4ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  ↳ app/views/events/index.html.erb:5
+  Rendered events/_event-card.html.erb (0.6ms)
+  Rendered events/index.html.erb within layouts/application (25.2ms)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/_header.html.erb:13
+  Rendered layouts/_header.html.erb (2.5ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 49ms (Views: 44.5ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-05-07 15:10:04 +0200
+Processing by EventsController#index as */*
+  Rendering events/index.html.erb within layouts/application
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  ↳ app/views/events/index.html.erb:5
+  Rendered events/_event-card.html.erb (0.6ms)
+  Rendered events/index.html.erb within layouts/application (25.6ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/_header.html.erb:13
+  Rendered layouts/_header.html.erb (2.4ms)
+  Rendered layouts/_footer.html.erb (0.4ms)
+Completed 200 OK in 119ms (Views: 95.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-05-07 15:12:05 +0200
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/alexis/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Processing by EventsController#index as HTML
+  Rendering events/index.html.erb within layouts/application
+  [1m[36mEvent Load (0.8ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  ↳ app/views/events/index.html.erb:5
+  Rendered events/_event-card.html.erb (0.8ms)
+  Rendered events/index.html.erb within layouts/application (28.8ms)
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/_header.html.erb:13
+  Rendered layouts/_header.html.erb (19.4ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 299ms (Views: 274.2ms | ActiveRecord: 11.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-05-07 15:12:06 +0200
+Processing by EventsController#index as */*
+  Rendering events/index.html.erb within layouts/application
+  [1m[36mEvent Load (0.5ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  ↳ app/views/events/index.html.erb:5
+  Rendered events/_event-card.html.erb (0.6ms)
+  Rendered events/index.html.erb within layouts/application (23.1ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 135ms (Views: 104.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-05-07 15:12:08 +0200
+Processing by EventsController#index as HTML
+  Rendering events/index.html.erb within layouts/application
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  ↳ app/views/events/index.html.erb:5
+  Rendered events/_event-card.html.erb (0.4ms)
+  Rendered events/index.html.erb within layouts/application (3.3ms)
+  Rendered layouts/_header.html.erb (1.8ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 24ms (Views: 20.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-05-07 15:12:08 +0200
+Processing by EventsController#index as */*
+  Rendering events/index.html.erb within layouts/application
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  ↳ app/views/events/index.html.erb:5
+  Rendered events/_event-card.html.erb (1.3ms)
+  Rendered events/index.html.erb within layouts/application (24.0ms)
+  Rendered layouts/_header.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 116ms (Views: 91.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/events/1" for 127.0.0.1 at 2019-05-07 15:12:11 +0200
+Processing by EventsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mEvent Load (0.8ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/events_controller.rb:71
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/events_controller.rb:72
+  Rendering events/show.html.erb within layouts/application
+  [1m[35m (2.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" INNER JOIN "attendances" ON "users"."id" = "attendances"."user_id" WHERE "attendances"."event_id" = $1[0m  [["event_id", 1]]
+  ↳ app/views/events/show.html.erb:4
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "attendances" ON "users"."id" = "attendances"."user_id" WHERE "attendances"."event_id" = $1[0m  [["event_id", 1]]
+  ↳ app/helpers/events_helper.rb:7
+  Rendered events/show.html.erb within layouts/application (20.0ms)
+  Rendered layouts/_header.html.erb (0.9ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 88ms (Views: 30.4ms | ActiveRecord: 9.5ms)
+
+
+Started GET "/events/1" for 127.0.0.1 at 2019-05-07 15:12:11 +0200
+Processing by EventsController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mEvent Load (0.7ms)[0m  [1m[34mSELECT  "events".* FROM "events" WHERE "events"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/events_controller.rb:71
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/events_controller.rb:72
+  Rendering events/show.html.erb within layouts/application
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" INNER JOIN "attendances" ON "users"."id" = "attendances"."user_id" WHERE "attendances"."event_id" = $1[0m  [["event_id", 1]]
+  ↳ app/views/events/show.html.erb:4
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" INNER JOIN "attendances" ON "users"."id" = "attendances"."user_id" WHERE "attendances"."event_id" = $1[0m  [["event_id", 1]]
+  ↳ app/helpers/events_helper.rb:7
+  Rendered events/show.html.erb within layouts/application (4.1ms)
+  Rendered layouts/_header.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 105ms (Views: 68.8ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/events/1/charges/new" for 127.0.0.1 at 2019-05-07 15:12:13 +0200
+Processing by ChargesController#new as HTML
+  Parameters: {"event_id"=>"1"}
+Completed 401 Unauthorized in 9ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-07 15:12:13 +0200
+Processing by Devise::SessionsController#new as HTML
+  Rendering /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/shared/_links.html.erb (1.0ms)
+  Rendered /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/sessions/new.html.erb within layouts/application (27.3ms)
+  Rendered layouts/_header.html.erb (0.9ms)
+  Rendered layouts/_footer.html.erb (0.2ms)
+Completed 200 OK in 49ms (Views: 46.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-07 15:12:14 +0200
+Processing by Devise::SessionsController#new as */*
+  Rendering /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/shared/_links.html.erb (1.3ms)
+  Rendered /Users/alexis/.rvm/gems/ruby-2.5.1/gems/devise-4.6.1/app/views/devise/sessions/new.html.erb within layouts/application (8.9ms)
+  Rendered layouts/_header.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 38ms (Views: 36.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-05-07 15:12:16 +0200
+Processing by EventsController#index as HTML
+  Rendering events/index.html.erb within layouts/application
+  [1m[36mEvent Load (0.6ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  ↳ app/views/events/index.html.erb:5
+  Rendered events/_event-card.html.erb (0.5ms)
+  Rendered events/index.html.erb within layouts/application (4.4ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 31ms (Views: 27.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-05-07 15:12:17 +0200
+Processing by EventsController#index as */*
+  Rendering events/index.html.erb within layouts/application
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  ↳ app/views/events/index.html.erb:5
+  Rendered events/_event-card.html.erb (0.6ms)
+  Rendered events/index.html.erb within layouts/application (22.1ms)
+  Rendered layouts/_header.html.erb (1.1ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 122ms (Views: 94.7ms | ActiveRecord: 0.3ms)
+
+
