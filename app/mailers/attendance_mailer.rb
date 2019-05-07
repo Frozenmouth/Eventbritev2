@@ -9,7 +9,7 @@ class AttendanceMailer < ApplicationMailer
 
 
     #on définit une variable @url qu'on utilisera dans la view d’e-mail
-    @url  = 'http://monsite.fr/login'
+    @url  = 'https://eventbrite-v2.herokuapp.com/'
 
     # c'est cet appel à mail() qui permet d'envoyer l’e-mail en définissant destinataire et sujet.
     mail(to: @user.email, subject: "Tu t'es inscrit à l'évènement #{@event.title} !")
@@ -20,7 +20,7 @@ class AttendanceMailer < ApplicationMailer
     @event = attendance.event
     @creator = @event.user
 
-    @url = 'http://monsite.fr/login'
+    @url = 'https://eventbrite-v2.herokuapp.com/'
 
     mail(to: @creator.email, subject: "#{@user.first_name} #{@user.last_name} s'est inscrit(e) à ton évènement #{@event.title} !")
   end
