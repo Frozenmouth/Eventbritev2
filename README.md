@@ -3,7 +3,7 @@ You can also get to my app on Heroku by following the link : https://eventbrite-
 
 Instructions :
 
-1)Make a git clone: https://github.com/Frozenmouth/The_Gossip_Project 
+1) Make a git clone: https://github.com/Frozenmouth/The_Gossip_Project 
 
 2) Install gems: `bundle install`
 
